@@ -8,7 +8,7 @@ final int START_BUTTON_X = 248;
 final int START_BUTTON_Y = 360;
 
 PImage title, gameover, startNormal, startHovered, restartNormal, restartHovered;
-PImage bg, soil8x24;
+PImage bg, soil8x24, Health, groundhogldle, stone1 , stone2;
 
 // For debug function; DO NOT edit or remove this!
 int playerHealth = 0;
@@ -26,6 +26,10 @@ void setup() {
 	restartNormal = loadImage("img/restartNormal.png");
 	restartHovered = loadImage("img/restartHovered.png");
 	soil8x24 = loadImage("img/soil8x24.png");
+	groundhogldle = loadImage("img/groundhogldle.png");
+	Health = loadImage("img/life.png");
+	stone1 = loadImage("img/stone1.png");
+	stone2 = loadImage("img/stone2.png");
 }
 
 void draw() {
@@ -81,12 +85,26 @@ void draw() {
 		noStroke();
 		rect(0, 160 - GRASS_HEIGHT, width, GRASS_HEIGHT);
 
-		// Soil - REPLACE THIS PART WITH YOUR LOOP CODE!
+		// Soil - 
 		image(soil8x24, 0, 160);
+		for(int a = 1 ; a <= 24 ; a++){
+			if(a >= 1 && a <= 8){
+				image (stone1,random(640),random(160));
+			}
+			else if(a >= 9 && a <= 16 ){
+				image (stone2,random(640),random(320));
+			}
+			//else if(a >= 17 && a <= 24 ){
+			//	random image;
+			//}
+		}
 
 		// Player
+		image(groundhogldle,124,204);
 
 		// Health UI
+		image(Health,360,20);
+		
 
 		break;
 
@@ -135,14 +153,17 @@ void keyPressed(){
       break;
 
       case 'a':
+	  debugMode = true;
       if(playerHealth > 0) playerHealth --;
       break;
 
       case 'd':
+	  debugMode = true;
       if(playerHealth < 5) playerHealth ++;
       break;
     }
 }
 
 void keyReleased(){
+
 }
